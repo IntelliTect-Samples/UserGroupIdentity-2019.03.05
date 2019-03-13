@@ -1,0 +1,32 @@
+﻿@page
+@addTagHelper *, Microsoft.AspNetCore.ApiAuthorization.IdentityServer
+
+@model UserGroupIdentity.Web.Pages.IndexModel
+@{
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+</head>
+<body>
+    <h1>IdenityTest SPA client</h1>
+    <button id="login">Login</button>
+    <button id="logout" disabled>Logout</button>
+    <button id="call-api" disabled>Call API</button>
+    <div id="login-result"></div>
+    <div id="api-result"></div>
+    <script src="js/oidc-client.js"></script>
+    <script id="apiauth" type="text/javascript" asp-apiauth-parameters="IdentityTestSPA">
+        let $data = document.querySelector("#apiauth");
+        let configuration = {};
+        for (let key in $data.dataset) {
+            configuration[key] = $data.dataset[key];
+        }
+
+        let mgr = new Oidc.UserManager(configuration);
+    </script>
+    <script src="js/app.js"></script>
+</body>
+</html>
